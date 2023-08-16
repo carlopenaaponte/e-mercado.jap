@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
       const autenticacionExitosa = true;
       
       if (autenticacionExitosa) {
-        localStorage.setItem("username", username);
-        localStorage.setItem("isLoggedIn", true);
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("isLoggedIn", true);
 
         window.location.href = "index.html"; // Redirige a la página principal después del inicio de sesión
       } else {

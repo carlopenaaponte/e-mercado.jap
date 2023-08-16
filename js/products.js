@@ -121,7 +121,7 @@ fetch(url)
                 </div>
             `;
         });
-
+    
         productos.innerHTML = htmlContent;
     }
        
