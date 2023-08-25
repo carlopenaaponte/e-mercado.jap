@@ -1,129 +1,318 @@
 
-// const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+// Codigo Filtrar precio, Limpiar
 
-// // console.log('Fetching data...');
-// // Realiza la solicitud fetch
-// fetch(url)
-//     .then(response => response.json())
-//     .then(data => {
-//         // Obtén la referencia al contenedor de la lista de productos
-//         const productos = document.querySelector('.product-list');
-
-//         // Construye el contenido HTML 
-//         let htmlContent = '';
-
-//         data.products.forEach(product => {
-//             htmlContent += `
-//                 <div class="list-group-item list-group-item-action">
-//                     <div class="row">
-//                         <div class="col-3">
-//                             <img src="${product.image}" alt="product image" class="img-thumbnail">
-//                         </div>
-//                         <div class="col">
-//                             <div class="d-flex w-100 justify-content-between">
-//                                 <div class="mb-1">
-//                                     <h4>${product.name} - ${product.currency} ${product.cost}</h4>
-//                                     <p>${product.description}</p>
-//                                 </div>
-//                                 <small class="text-muted">${product.soldCount} artículos</small>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             `;
-//         });
-
-//         // Inserta el contenido HTML en el contenedor
-//         productos.innerHTML = htmlContent;
-//     })
-//     .catch(error => {
-//         console.error('Error fetching data');
-//     })
+// document.addEventListener("DOMContentLoaded", function() {
+//   const catID = localStorage.getItem("catID");
+//   let sortOrder = '';
 
 
-// solucion de Aby
+//   if (catID) {
+//     const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+//     fetch(url)
+//       .then(response => response.json())
+//       .then(resultado => mostrarHTML(resultado))
+//       .catch(error => console.error('Ocurrió un error:', error));
+//   }
 
-// const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+//   function mostrarHTML(data) {
+//     const productosContainer = document.querySelector('.product-list');
+    
+//     const minPrice = parseFloat(document.querySelector('#rangeFilterPriceMin').value);
+//     const maxPrice = parseFloat(document.querySelector('#rangeFilterPriceMax').value);
 
-// const productsArray = [];
 
-// function showData(array) {
-// //   const productListContainer = document.getElementById("product-list");
-//   const productListContainer = document.querySelector(".product-list");
-//   let htmlContentToAppend = '';
+//     if (sortOrder === 'asc') {
+//       data.products.sort((a, b) => a.name.localeCompare(b.name));
+//     } else if (sortOrder === 'desc') {
+//       data.products.sort((a, b) => b.name.localeCompare(a.name));
+//     }
 
-//   productsArray.forEach(category => {
-//     htmlContentToAppend += `
-//     <div class="list-group-item list-group-item-action">
-//         <div class="row">
-//             <div class="col-3">
-//                 <img src="` + category.image + `" alt="product image" class="img-thumbnail">
-//             </div>
-//             <div class="col">
+   
+    
+//     let htmlContent = '';
+
+//     data.products.forEach(product => {
+//       const productPrice = parseFloat(product.cost);
+
+//       if ((isNaN(minPrice) || productPrice >= minPrice) &&
+//           (isNaN(maxPrice) || productPrice <= maxPrice)) {
+//         htmlContent += `
+//           <div class="list-group-item list-group-item-action">
+//             <div class="row">
+//               <div class="col-3">
+//                 <img src="${product.image}" alt="product image" class="img-thumbnail">
+//               </div>
+//               <div class="col">
 //                 <div class="d-flex w-100 justify-content-between">
-//                     <div class="mb-1">
-//                     <h4>`+ category.name + ' - ' + category.currency + ' ' + category.cost + `</h4> 
-//                     <p> `+ category.description + `</p> 
-//                     </div>
-//                     <small class="text-muted">` + category.soldCount + ` artículos</small> 
+//                   <div class="mb-1">
+//                     <h4>${product.name} - ${product.currency} ${product.cost}</h4>
+//                     <p>${product.description}</p>
+//                   </div>
+//                   <small class="text-muted">${product.soldCount} artículos</small>
 //                 </div>
-
+//               </div>
 //             </div>
-//         </div>
-//     </div>
-//     `
-//     productListContainer.innerHTML = htmlContentToAppend;
-//   })
+//           </div>
+//         `;
+//       }
+//     });
 
-// };
+//     productosContainer.innerHTML = htmlContent;
+//   }
 
-// fetch(url)
-//   .then(response => response.json())
-//   .then(data => {
-//     productsArray.push(...data.products);
+//   // Agregar evento a los botones de ordenamiento
+//   document.querySelector('#sortAsc').addEventListener('click', () => {
+//     sortOrder = 'asc';
+//     cargarProductos(catID);
+//   });
 
-//     showData(productsArray);
-//   })
-//   .catch(error => console.error('Error al cargar los productos', error));
+//   document.querySelector('#sortDesc').addEventListener('click', () => {
+//     sortOrder = 'desc';
+//     cargarProductos(catID);
+//   });
 
 
-// Solucion codigoconjuan
+//   // Agregar evento al botón de filtro de precio
+//   document.querySelector('#rangeFilterPrice').addEventListener('click', () => {
+//     const catID = localStorage.getItem("catID");
+//     cargarProductos(catID);
+//   });
 
-const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+//   // Agregar evento al botón de limpiar
+//   document.querySelector('#clearRangeFilter').addEventListener('click', () => {
+//     document.querySelector('#rangeFilterPriceMin').value = '';
+//     document.querySelector('#rangeFilterPriceMax').value = '';
+//     const catID = localStorage.getItem("catID");
+//     cargarProductos(catID);
+//   });
 
-fetch(url)
-    .then(response => response.json())
-    .then(resultado => mostrarHTML ( resultado ));
+//   // Función para cargar productos
+//   function cargarProductos(catID) {
+//     if (catID) {
+//       const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+//       fetch(url)
+//         .then(response => response.json())
+//         .then(resultado => mostrarHTML(resultado))
+//         .catch(error => console.error('Ocurrió un error:', error));
+//     }
+//   }
+// });
 
+
+// Codigo Buscar por Relevancia
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const catID = localStorage.getItem("catID");
+//   let sortOrder = '';
+
+
+//   if (catID) {
+//     const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+//     fetch(url)
+//       .then(response => response.json())
+//       .then(resultado => mostrarHTML(resultado))
+//       .catch(error => console.error('Ocurrió un error:', error));
+//   }
+
+//   function mostrarHTML(data) {
+//     const productosContainer = document.querySelector('.product-list');
     
-    function mostrarHTML(data){
-        const productos = document.querySelector('.product-list');
+//     const minPrice = parseFloat(document.querySelector('#rangeFilterPriceMin').value);
+//     const maxPrice = parseFloat(document.querySelector('#rangeFilterPriceMax').value);
 
-        let htmlContent = '';
 
-        data.products.forEach(product => {
-            htmlContent += `
-                <div class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-3">
-                            <img src="${product.image}" alt="product image" class="img-thumbnail">
-                        </div>
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <div class="mb-1">
-                                    <h4>${product.name} - ${product.currency} ${product.cost}</h4>
-                                    <p>${product.description}</p>
-                                </div>
-                                <small class="text-muted">${product.soldCount} artículos</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+//     if (sortOrder === 'asc') {
+//       data.products.sort((a, b) => a.name.localeCompare(b.name));
+//     } else if (sortOrder === 'desc') {
+//       data.products.sort((a, b) => b.name.localeCompare(a.name));
+//     } else if (sortOrder === 'soldCount') {
+//       data.products.sort((a, b) => b.soldCount - a.soldCount);
+//     }
+
+   
     
-        productos.innerHTML = htmlContent;
+//     let htmlContent = '';
+
+//     data.products.forEach(product => {
+//       const productPrice = parseFloat(product.cost);
+
+//       if ((isNaN(minPrice) || productPrice >= minPrice) &&
+//           (isNaN(maxPrice) || productPrice <= maxPrice)) {
+//         htmlContent += `
+//           <div class="list-group-item list-group-item-action">
+//             <div class="row">
+//               <div class="col-3">
+//                 <img src="${product.image}" alt="product image" class="img-thumbnail">
+//               </div>
+//               <div class="col">
+//                 <div class="d-flex w-100 justify-content-between">
+//                   <div class="mb-1">
+//                     <h4>${product.name} - ${product.currency} ${product.cost}</h4>
+//                     <p>${product.description}</p>
+//                   </div>
+//                   <small class="text-muted">${product.soldCount} artículos</small>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         `;
+//       }
+//     });
+
+//     productosContainer.innerHTML = htmlContent;
+//   }
+
+//   // Agregar evento a los botones de ordenamiento
+//   document.querySelector('#sortAsc').addEventListener('click', () => {
+//     sortOrder = 'asc';
+//     cargarProductos(catID);
+//   });
+
+//   document.querySelector('#sortDesc').addEventListener('click', () => {
+//     sortOrder = 'desc';
+//     cargarProductos(catID);
+//   });
+
+//   document.querySelector('#sortByCount').addEventListener('click', () => {
+//     sortOrder = 'soldCount'; // Ordenar por cantidad de ventas
+//     cargarProductos(catID);
+//   });
+
+//   // Agregar evento al botón de filtro de precio
+//   document.querySelector('#rangeFilterPrice').addEventListener('click', () => {
+//     const catID = localStorage.getItem("catID");
+//     cargarProductos(catID);
+//   });
+
+//   // Agregar evento al botón de limpiar
+//   document.querySelector('#clearRangeFilter').addEventListener('click', () => {
+//     document.querySelector('#rangeFilterPriceMin').value = '';
+//     document.querySelector('#rangeFilterPriceMax').value = '';
+//     const catID = localStorage.getItem("catID");
+//     cargarProductos(catID);
+//   });
+
+//   // Función para cargar productos
+//   function cargarProductos(catID) {
+//     if (catID) {
+//       const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+//       fetch(url)
+//         .then(response => response.json())
+//         .then(resultado => mostrarHTML(resultado))
+//         .catch(error => console.error('Ocurrió un error:', error));
+//     }
+//   }
+// });
+
+
+// Codigo Buscar productos 
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const catID = localStorage.getItem("catID");
+  let sortOrder = '';
+  let searchData = [];
+
+  if (catID) {
+    const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+    fetch(url)
+      .then(response => response.json())
+      .then(resultado => {
+        searchData = resultado.products;
+        mostrarHTML(searchData);
+      })
+      .catch(error => console.error('Ocurrió un error:', error));
+  }
+
+  function mostrarHTML(data) {
+    const productosContainer = document.querySelector('.product-list');
+    const minPrice = parseFloat(document.querySelector('#rangeFilterPriceMin').value);
+    const maxPrice = parseFloat(document.querySelector('#rangeFilterPriceMax').value);
+    const searchInput = document.querySelector('#searchInput').value.trim().toLowerCase();
+
+    if (sortOrder === 'asc') {
+      data.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOrder === 'desc') {
+      data.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (sortOrder === 'soldCount') {
+      data.sort((a, b) => b.soldCount - a.soldCount);
     }
-       
 
-       
+    let filteredData = data.filter(product => {
+      const productPrice = parseFloat(product.cost);
+
+      return ((isNaN(minPrice) || productPrice >= minPrice) &&
+              (isNaN(maxPrice) || productPrice <= maxPrice) &&
+              (product.name.toLowerCase().includes(searchInput) || product.description.toLowerCase().includes(searchInput)));
+    });
+
+    let htmlContent = '';
+
+    filteredData.forEach(product => {
+      htmlContent += `
+        <div class="list-group-item list-group-item-action">
+          <div class="row">
+            <div class="col-3">
+              <img src="${product.image}" alt="product image" class="img-thumbnail">
+            </div>
+            <div class="col">
+              <div class="d-flex w-100 justify-content-between">
+                <div class="mb-1">
+                  <h4>${product.name} - ${product.currency} ${product.cost}</h4>
+                  <p>${product.description}</p>
+                </div>
+                <small class="text-muted">${product.soldCount} artículos</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    productosContainer.innerHTML = htmlContent;
+  }
+
+  document.querySelector('#sortAsc').addEventListener('click', () => {
+    sortOrder = 'asc';
+    cargarProductos(catID);
+  });
+
+  document.querySelector('#sortDesc').addEventListener('click', () => {
+    sortOrder = 'desc';
+    cargarProductos(catID);
+  });
+
+  document.querySelector('#sortByCount').addEventListener('click', () => {
+    sortOrder = 'soldCount';
+    cargarProductos(catID);
+  });
+
+  document.querySelector('#rangeFilterPrice').addEventListener('click', () => {
+    cargarProductos(catID);
+  });
+
+  document.querySelector('#clearRangeFilter').addEventListener('click', () => { // Limpiamos todos los campos 
+    document.querySelector('#rangeFilterPriceMin').value = '';
+    document.querySelector('#rangeFilterPriceMax').value = '';
+    document.querySelector('#searchInput').value = '';
+    sortOrder = '';
+    cargarProductos(catID);
+  });
+
+  document.querySelector('#searchInput').addEventListener('input', () => {
+    mostrarHTML(searchData);
+  });
+
+  function cargarProductos(catID) {
+    if (catID) {
+      const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+      fetch(url)
+        .then(response => response.json())
+        .then(resultado => {
+          searchData = resultado.products;
+          mostrarHTML(searchData);
+        })
+        .catch(error => console.error('Ocurrió un error:', error));
+    }
+  }
+});
