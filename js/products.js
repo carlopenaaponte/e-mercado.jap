@@ -231,9 +231,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.querySelector('#searchInput').value.trim().toLowerCase();
 
     if (sortOrder === 'asc') {
-      data.sort((a, b) => a.name.localeCompare(b.name));
+      // data.sort((a, b) => a.name.localeCompare(b.name)); // Podemos ordenar de AZ por el nombre 
+      data.sort((a, b) => a.cost - b.cost);
     } else if (sortOrder === 'desc') {
-      data.sort((a, b) => b.name.localeCompare(a.name));
+      // data.sort((a, b) => b.name.localeCompare(a.name)); // Podemos ordenar de ZA por el nombre  
+      data.sort((a, b) => b.cost - a.cost);
     } else if (sortOrder === 'soldCount') {
       data.sort((a, b) => b.soldCount - a.soldCount);
     }
