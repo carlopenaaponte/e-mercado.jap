@@ -15,7 +15,7 @@
 <body>
   <script>
     // Verificar si el usuario está autenticado
-    const isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
     
     // Redirigir al formulario de inicio de sesión si no está autenticado
     if (!isLoggedIn) {
@@ -40,7 +40,7 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li id="mostarLogin" class="nav-item">
           </li>
         </ul>
       </div>

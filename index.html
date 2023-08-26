@@ -15,7 +15,7 @@
   
   <script>
     
-    const isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
     
     if (!isLoggedIn) {
       alert("Debes iniciar sesión para acceder a esta página.");
@@ -41,7 +41,7 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li id="mostarLogin" class="nav-item">
           </li>
         </ul>
       </div>
