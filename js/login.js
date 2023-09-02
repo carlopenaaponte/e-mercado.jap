@@ -1,6 +1,3 @@
-
- // login.js
-
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.querySelector("form");
 
@@ -13,10 +10,11 @@ document.addEventListener("DOMContentLoaded", function() {
     if (username.trim() === "" || password.trim() === "") {
       alert("Por favor, completa todos los campos.");
     } else {
-      localStorage.setItem("username", username);
-      localStorage.setItem("isLoggedIn", true);
+       localStorage.setItem("username", username);
+       localStorage.setItem("isLoggedIn", true);
 
       window.location.href = "index.html"; 
     }
   });
 });
+  

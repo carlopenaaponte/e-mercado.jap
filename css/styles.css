@@ -192,7 +192,7 @@ a.custom-card:hover {
 .login {
   margin: 0;
   padding: 0;
-  background-image: url(../img/fondologin.jpg) ;
+  background: url(../img/fondologin.jpg) no-repeat;
   background-size: cover;
   font-family: sans-serif;
   height: 100vh;
@@ -216,8 +216,17 @@ a.custom-card:hover {
 .logo-icono {
   position: relative;
   left: 36%;
- 
+  padding: 0px;
 }
+
+/* .login-box .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+} */
 
 .login-box h1 {
   margin: 0;
@@ -233,7 +242,7 @@ a.custom-card:hover {
   display: block;
 }
 
-.login-box input:not([type="checkbox"]){
+.login-box input:not([type="checkbox"]) {
   width: 100%;
   margin-bottom: 20px;
 }
@@ -274,7 +283,6 @@ a.custom-card:hover {
   font-size: 12px;
   line-height: 20px;
   color: darkgrey;
-  transition: .3s ease-in-out;
 }
 
 .login-box a:hover {

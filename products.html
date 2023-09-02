@@ -10,20 +10,10 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link rel="icon" href="img/logo.jpeg" type="image/png">
+  <link rel="icon" href="img/logo.jpg" type="image/png">
 </head>
 
 <body>
-  <script>
-    // Verificar si el usuario está autenticado
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    
-    // Redirigir al formulario de inicio de sesión si no está autenticado
-    if (!isLoggedIn) {
-      alert("Debes iniciar sesión para acceder a esta página.");
-      window.location.href = "login.html";
-    }
-  </script>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -41,13 +31,13 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li id="mostarLogin" class="nav-item">
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="userbutton"></a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
   <main id= container class="pb-5 container">
 
     <h1 class="text-center pt-3">Productos</h1>
@@ -62,12 +52,13 @@
           </form>
         </div>
         <!-- Fin de buscador -->
+        <!-- Filtrar,ordenar y relvancia-->
         <div class="col text-end">
           <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
             <input type="radio" class="btn-check" name="options" id="sortAsc">
-            <label class="btn btn-light" for="sortAsc">A-Z</label>
+            <label class="btn btn-light" for="sortAsc"><i class="fas fa-sort fa-sort-numeric-down"></i></label>
             <input type="radio" class="btn-check" name="options" id="sortDesc">
-            <label class="btn btn-light" for="sortDesc">Z-A</label>
+            <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-numeric-up"></i></label>
             <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
             <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
           </div>
@@ -100,6 +91,8 @@
       </div>
     </div>
     <div class="row">
+      <!-- Fin de Filtrar,ordenar y relvancia -->
+      
     <!-- Agregregando clase lista-productos -->
     <div class="container product-list p-3" > 
 
@@ -110,7 +103,6 @@
       
     </div>
   </main>
-  
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
