@@ -7,16 +7,18 @@ document.addEventListener("DOMContentLoaded", function() {
       const minPrice = parseInt(document.querySelector('#rangeFilterPriceMin').value);
       const maxPrice = parseInt(document.querySelector('#rangeFilterPriceMax').value);
       const searchInput = document.querySelector('#searchInput').value.trim().toLowerCase(); 
-
-      if (sortOrder === 'asc') {  
+      
+  
+      if (sortOrder === 'asc') {
+        // data.sort((a, b) => a.name.localeCompare(b.name)); // Podemos ordenar de AZ por el nombre 
         data.sort((a, b) => a.cost - b.cost);
-    // data.sort((a, b) => a.name.localeCompare(b.name)); // Podemos ordenar de AZ por el nombre 
-
-      } else if (sortOrder === 'soldCount') { 
+      } else if (sortOrder === 'desc') {
+        // data.sort((a, b) => b.name.localeCompare(a.name)); // Podemos ordenar de ZA por el nombre  
+        data.sort((a, b) => b.cost - a.cost);
+      } else if (sortOrder === 'soldCount') {
         data.sort((a, b) => b.soldCount - a.soldCount);
       }
-    // data.sort((a, b) => b.name.localeCompare(a.name)); // Podemos ordenar de ZA por el nombre  
-
+  
       let filteredData = data.filter(product => {
         const productPrice = parseInt(product.cost);
   
@@ -65,32 +67,21 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 
-  /* ------------------------------------------------------------------- */     
-
-        // A S C E N D E N T E 
     document.querySelector('#sortAsc').addEventListener('click', () => {
       sortOrder = 'asc';
       cargarProductos(catID);
     });
-    
-        // D E S C E N D E N T E 
+  
     document.querySelector('#sortDesc').addEventListener('click', () => {
       sortOrder = 'desc';
       cargarProductos(catID);
     });
-
-        // R E L E V A N C I A  -  D E S C E N D E N T E 
+  
     document.querySelector('#sortByCount').addEventListener('click', () => {
       sortOrder = 'soldCount';
       cargarProductos(catID);
     });
   
-  /* ------------------------------------------------------------------- */       
-
-
-
-
-
     document.querySelector('#rangeFilterPrice').addEventListener('click', () => {
       cargarProductos(catID);
     });
@@ -113,5 +104,3 @@ document.addEventListener("DOMContentLoaded", function() {
   });      
 
        
-
-
