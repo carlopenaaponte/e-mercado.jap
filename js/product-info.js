@@ -1,12 +1,9 @@
-// PRIMERA PARTE ---------- (MAXI)
 window.onload = function () {
   const productId = localStorage.getItem("IdProducto");
   ObtenerInfo(productId);
   ObtenerComentarios(productId);
 };
 
-
-// SEGUNDA PARTE ------------------------------------(VALENTINA)
 function ObtenerInfo(ID) {
   const url = `https://japceibal.github.io/emercado-api/products/${ID}.json`;
   fetch(url)
@@ -49,23 +46,6 @@ function mostrarImagenes(producto) {
   return contenedorImagenes;
 }
 
-
-// TERCERA PARTE ---------------------------------------------------(ALEJNDRO)
-
-//Funcion para crear las estrellas 
-function starRating(rating){ 
-  let ratingHTML = ''
-  for (let i=1; i<= 5; i++){
-      if (i<=rating) {
-      ratingHTML += `<span class="fa fa-star checked"></span>`
-      }
-      else {
-          ratingHTML += `<span class="fa fa-star"></span>`;
-      }
-  }
-  return ratingHTML
-}
-
 // Crear Fecha 
 const currentDate = new Date();
 
@@ -81,17 +61,30 @@ const currentDate = new Date();
 
 
 
-
+//Funcion para crear las estrellas 
+function starRating(rating){ 
+  let ratingHTML = ''
+  for (let i=1; i<= 5; i++){
+      if (i<=rating) {
+      ratingHTML += `<span class="fa fa-star checked"></span>`
+      }
+      else {
+          ratingHTML += `<span class="fa fa-star"></span>`;
+      }
+  }
+  return ratingHTML
+}
 
 // Comentarios
-// CUARTA PARTE ------------------------------------------------------------------------(CARLO)
 function ObtenerComentarios(ID) {
   const url = `https://japceibal.github.io/emercado-api/products_comments/${ID}.json`;
 
   fetch(url)
     .then((response) => response.json())
     .then((comentarios) => {
+      
       const mostrarComentarios = document.getElementById("comentarios");
+      
       comentarios.forEach((comentario) => {
         const li = document.createElement("li");
         li.innerHTML = `
@@ -106,9 +99,7 @@ function ObtenerComentarios(ID) {
     .catch((error) => console.error("Ocurrió un error:", error));
 }
 
-// QUINTA PARTE (FORMULARIO HTML)------------------------------------------------------------------------(LAURO) 
 
-// SEXTA PARTE ------------------------------------------------------------------------------------------(BRUNO)
 function mostrarComentarioNuevo(nuevoComentario) {  //Funcion para agregar el comentario nuevo a la pagina
   const contenedorComentarios = document.getElementById('comentarios')
   let containerComentarioNuevo = `
