@@ -105,11 +105,13 @@ function mostrarProductoRelacionado(producto) {
   contenedorProductoRelacionado += '<div class="row">';
   producto.relatedProducts.forEach(element => {
     contenedorProductoRelacionado += `
-      <div class="col-md-3 mb-4">
+    
+      <div onclick='redireccionarProducto(${element.id})'class="col-md-3 mb-4 cursor-active">
+      
         <div class="card">
           <img class="card-img-top" src="${element.image}" alt="Imagen">
           <div class="card-body">
-            <p class="card-text">${element.name}</p>
+            <p class="card-text mb-1">${element.name}</p>
           </div>
         </div>
       </div>

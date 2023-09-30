@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const minPrice = parseInt(document.querySelector('#rangeFilterPriceMin').value);
       const maxPrice = parseInt(document.querySelector('#rangeFilterPriceMax').value);
       const searchInput = document.querySelector('#searchInput').value.trim().toLowerCase(); 
+      let darkModeClass = body.classList.contains("dark-mode") ? "dark-mode" : "";
       
   
       if (sortOrder === 'asc') {
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
       filteredData.forEach(product => {
         htmlContent += `
-          <div class="list-group-item list-group-item-action cursor-active" onclick="ObtenerId('${product.id}')">
+          <div class="list-group-item list-group-item-action cursor-active  ${darkModeClass}" onclick="ObtenerId('${product.id}')">
             <div class="row">
               <div class="col-3">
                 <img src="${product.image}" alt="product image" class="img-thumbnail">
