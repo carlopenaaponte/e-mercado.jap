@@ -71,27 +71,9 @@ logOut.addEventListener("click", function() {
 });
 
 
-// // Cambiar el Background de la pagina
-// const colorModeButton = document.querySelector('#color-mode');
-// const body = document.body; 
-
-// colorModeButton.addEventListener("click", cambiarModoColor);
-// function cambiarModoColor() {
-//     body.classList.toggle("dark-mode");
-   
-//     if (body.classList.contains("dark-mode") ) {
-//         colorModeButton.innerText = "Cambiar a Light";
-//     } else {
-//         colorModeButton.innerText = "Cambiar a Dark";
-//     }
-
-// }
-
 // Cambiar el Background de la pagina
 const colorModeButton = document.querySelector('#color-mode');
 const body = document.body;
-const categorias = document.getElementById('cat-list-container');
-const productos = document.querySelector('.product-list');
 
 // Recuperar el estado del modo de color desde localStorage (si existe)
 const isDarkMode = localStorage.getItem('darkMode') === 'true';
@@ -100,34 +82,21 @@ const isDarkMode = localStorage.getItem('darkMode') === 'true';
 if (isDarkMode) {
   body.classList.add("dark-mode");
   colorModeButton.innerText = "Cambiar a Light";
-  categorias.classList.add('dark-mode');
-}
-
-function actulizarModeColor(){
-  let darkModeClass = body.classList.contains('dark-mode') ? 'dark-mode' :"";
-  const categoriasItem = document.querySelectorAll('.list-group-item');
-  categoriasItem.forEach(function (item){
-    item.classList.toggle('dark-mode', darkModeClass !== "");
-  })
 }
 
 colorModeButton.addEventListener("click", cambiarModoColor);
 
 function cambiarModoColor() {
   body.classList.toggle("dark-mode");
-  categorias.classList.toggle("dark-mode");
 
   // Guardar el estado del modo de color en localStorage
   localStorage.setItem('darkMode', body.classList.contains("dark-mode"));
-  localStorage.setItem('darkMode', categorias.classList.contains("dark-mode"));
-  localStorage.setItem('darkMode', productos.classList.contains("dark-mode"));
 
   if (body.classList.contains("dark-mode")) {
     colorModeButton.innerText = "Cambiar a Light";
   } else {
     colorModeButton.innerText = "Cambiar a Dark";
   }
-  actulizarModeColor();
 }
 
-
+z

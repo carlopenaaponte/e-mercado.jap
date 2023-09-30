@@ -293,7 +293,7 @@ a.custom-card:hover {
 .dark-mode {
   /* background-color: #666666; */
   background: rgb(27,16,34);
-background: linear-gradient(90deg, rgba(27,16,34,1) 35%, rgba(72,44,44,1) 55%, rgba(7,5,2,1) 86%);
+  background: linear-gradient(90deg, rgba(27,16,34,1) 35%, rgba(72,44,44,1) 55%, rgba(7,5,2,1) 86%);
   color: white;
 }
 .dark-mode p:not(.mb-1){
