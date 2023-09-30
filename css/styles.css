@@ -8,6 +8,9 @@
 .jumbotron .display-4 {
   font-weight: bold;
 }
+body{
+  transition: background-color 0.3s, color 0.3s;
+}
 
 nav a {
   text-decoration: none;
@@ -287,4 +290,19 @@ a.custom-card:hover {
 
 .login-box a:hover {
   color: #fff;
+}
+
+/* Cambiar Background de la pagina  */
+.dark-mode {
+  background-color: #666666;
+  color: white;
+}
+.dark-mode p{
+  color: white;
+}
+.dark-mode a:not(.dropdown-item) {
+  color: white;
+} 
+.dark-mode #clearRangeFilter  {
+  color: white;
 }

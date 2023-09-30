@@ -1,8 +1,11 @@
+
 window.onload = function () {
   const productId = localStorage.getItem("IdProducto");
   ObtenerInfo(productId);
   ObtenerComentarios(productId);
 };
+
+
 
 function ObtenerInfo(ID) {
   const url = `https://japceibal.github.io/emercado-api/products/${ID}.json`;
@@ -46,18 +49,6 @@ function mostrarImagenes(producto) {
   return contenedorImagenes;
 }
 
-// Crear Fecha 
-const currentDate = new Date();
-
- const year = currentDate.getFullYear();
- const month = String(currentDate.getMonth() + 1).padStart(2, '0'); //Los meses estan indexados en 0, por eso se agrega 1
- const day = String(currentDate.getDate()).padStart(2, '0'); //.padStart hace que un string empiece con un caracter especifico hasta que el string tenga el largo indicado
- const hours = String(currentDate.getHours()).padStart(2, '0');
- const minutes = String(currentDate.getMinutes()).padStart(2, '0');
- const seconds = String(currentDate.getSeconds()).padStart(2, '0');
- 
- const formattedDate = ` ${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
 
 
 
@@ -75,16 +66,31 @@ function starRating(rating){
   return ratingHTML
 }
 
-// Comentarios
+// Crear Fecha 
+const currentDate = new Date();
+
+ const year = currentDate.getFullYear();
+ const month = String(currentDate.getMonth() + 1).padStart(2, '0'); //Los meses estan indexados en 0, por eso se agrega 1
+ const day = String(currentDate.getDate()).padStart(2, '0'); //.padStart hace que un string empiece con un caracter especifico hasta que el string tenga el largo indicado
+ const hours = String(currentDate.getHours()).padStart(2, '0');
+ const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+ const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+ 
+ const formattedDate = ` ${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+
+
+
+
+
+
 function ObtenerComentarios(ID) {
   const url = `https://japceibal.github.io/emercado-api/products_comments/${ID}.json`;
 
   fetch(url)
     .then((response) => response.json())
     .then((comentarios) => {
-      
       const mostrarComentarios = document.getElementById("comentarios");
-      
       comentarios.forEach((comentario) => {
         const li = document.createElement("li");
         li.innerHTML = `

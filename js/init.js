@@ -62,3 +62,24 @@ if (atIndex !== -1) {
  userButton.innerHTML = "Bienvenido! " + userId;
 }};
 window.onload = logCheck();
+
+
+const logOut = document.getElementById("logOut");
+logOut.addEventListener("click", function() {
+  localStorage.removeItem('isLoggedIn');
+  window.location.href = "index.html";
+});
+
+// Cambiar el Background de la pagina
+const colorModeButton = document.querySelector('#color-mode');
+const body = document.body; 
+
+colorModeButton.addEventListener("click", cambiarModoColor);
+function cambiarModoColor() {
+    body.classList.toggle("dark-mode");
+    if (body.classList.contains("dark-mode") ) {
+        colorModeButton.innerText = "Cambiar a Light";
+    } else {
+        colorModeButton.innerText = "Cambiar a Dark";
+    }
+}
