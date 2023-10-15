@@ -31,14 +31,17 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <div class="dropdown">
-            <a class="nav-link dropdown-toggle" type="button" id="userbutton" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" type="button" id="userbutton" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Inicia sesión
-            </a> 
+            </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
               <li><a class="dropdown-item" href="#" id="logOut">Cerrar sesión</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><button id="color-mode" class="btn">Cambiar a Dark</button></li>
             </ul>
           </div>
@@ -46,19 +49,70 @@
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+  <main id="product-container" class="pb-5 container">
+    <br>
+    <h1 class="text-center pt-3">Carrito de compras</h1>
+    <br>
+    <h5>Articulos a comprar</h5>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Costo</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="product-table-body">
+      </tbody>
+    </table> 
+    <div class="mb-3">
+      <button id="cleanCart">Limpiar Carrito</button>
     </div>
+    <div class="shippingType">
+      <p class="shippingType__titulo">Tipo de envío</p>
+      <div class="selectradio_button">
+        <label class="radio-button">
+          <input type="radio" name="opcion" value="opcion1">
+          Premium 2 a 5 días (15%)
+        </label> <!-- .selectradio_button-->
+        <label class="radio-button">
+          <input type="radio" name="opcion" value="opcion2">
+          Express 5 a 8 días (7%)
+        </label> <!-- .selectradio_button-->
+        <label class="radio-button">
+          <input type="radio" name="opcion" value="opcion3">
+          Standard 12 a 15 días (5%)
+        </label> <!-- .selectradio_button-->
+      </div> 
+      <p class="shippingType__titulo">Dirección de envío</p>  
+      <form class="shippingAddress">
+        <div>
+          <label for="calle">Calle:</label>
+        <input class="data" type="text" name="calle" placeholder="Ingrese la calle" required>
+        </div>
+        <div>
+          <label for="numero">Número:</label>
+        <input class="data" type="number" name="numero" placeholder="Ingrese el número" required>
+        </div>
+        <div>
+          <label for="esquina">Esquina:</label>
+          <input class="data" type="text" name="esquina" placeholder="Referencia" required>
+        </div>
+      </form> <!--.shippingAddress-->
+
+    </div> 
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <div id="spinner-wrapper">
